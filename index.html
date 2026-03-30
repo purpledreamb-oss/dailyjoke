@@ -85,17 +85,7 @@
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    @keyframes bounce {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
-    }
-
     .hero-inner { position: relative; z-index: 1; max-width: 600px; }
-    .hero-emoji {
-      font-size: 4rem; margin-bottom: 1rem;
-      animation: bounce 2s ease-in-out infinite;
-      display: inline-block;
-    }
     .hero-date {
       font-size: 0.8rem; font-weight: 300; color: var(--text-light);
       letter-spacing: 0.2em; margin-bottom: 1rem;
@@ -118,7 +108,7 @@
     }
     .joke-card::before {
       content: ''; position: absolute; inset: -2px;
-      background: linear-gradient(135deg, var(--yellow), var(--pink), var(--purple), var(--blue));
+      background: linear-gradient(135deg, #FF8C42, #FF6B8A);
       border-radius: 1.6rem; z-index: -1;
     }
     .joke-text {
@@ -276,7 +266,6 @@
       .nav-links { gap: 0.8rem; }
       .nav-links a { font-size: 0.75rem; }
       .joke-card { padding: 1.5rem 1.2rem; }
-      .hero-emoji { font-size: 3rem; }
       .btn { padding: 0.55rem 1.2rem; font-size: 0.8rem; }
     }
   </style>
@@ -294,7 +283,6 @@
 
   <section id="hero">
     <div class="hero-inner">
-      <div class="hero-emoji" id="hero-emoji">😂</div>
       <p class="hero-date" id="hero-date"></p>
       <p class="hero-tag">今 日 一 笑</p>
       <div class="joke-card" id="joke-card">
@@ -357,7 +345,6 @@
   <script>
     // Load jokes
     const jokes = JSON.parse(document.getElementById('joke-data').textContent);
-    const emojis = ['😂','🤣','😆','😹','🤭','😜','🫠','💀','😎','🤡','🎉','🫢','😏','🤪','🥲'];
     let currentIndex = 0;
     let filteredJokes = jokes;
     let currentCategory = '全部';
@@ -414,7 +401,6 @@
       document.getElementById('joke-author').textContent = joke.author ? `— ${joke.author}` : '';
       document.getElementById('joke-number').textContent =
         `${currentCategory === '全部' ? '' : currentCategory + ' '}第 ${idx + 1} / ${filteredJokes.length} 則`;
-      document.getElementById('hero-emoji').textContent = emojis[Math.floor(Math.random() * emojis.length)];
 
       // Re-trigger animation
       const card = document.getElementById('joke-card');
