@@ -354,9 +354,15 @@
     const dateStr = `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日 ${'日一二三四五六'[now.getDay()]}`;
     document.getElementById('hero-date').textContent = dateStr;
 
-    // Daily index (random)
+    // Daily index (date-based fixed seed)
     function getDailyIndex() {
-      return Math.floor(Math.random() * jokes.length);
+      const now = new Date();
+      const seed = now.getFullYear() * 10000 + (now.getMonth() + 1) * 100 + now.getDate();
+      let h = seed;
+      h = ((h >> 16) ^ h) * 0x45d9f3b;
+      h = ((h >> 16) ^ h) * 0x45d9f3b;
+      h = (h >> 16) ^ h;
+      return Math.abs(h) % jokes.length;
     }
 
     // Categories
