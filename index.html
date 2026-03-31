@@ -354,12 +354,9 @@
     const dateStr = `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日 ${'日一二三四五六'[now.getDay()]}`;
     document.getElementById('hero-date').textContent = dateStr;
 
-    // Daily index (deterministic)
+    // Daily index (random)
     function getDailyIndex() {
-      const start = new Date(now.getFullYear(), 0, 0);
-      const dayOfYear = Math.floor((now - start) / 86400000);
-      var seed = dayOfYear * 2654435761;
-      return (seed >>> 0) % jokes.length;
+      return Math.floor(Math.random() * jokes.length);
     }
 
     // Categories
